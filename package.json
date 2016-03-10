@@ -1,0 +1,53 @@
+{
+  "name": "@kshvmdn/til",
+  "version": "0.0.0",
+  "description": "Open random TILs from /r/todayilearned.",
+  "scripts": {
+    "lint": "xo",
+    "test": "npm run lint"
+  },
+  "author": {
+    "name": "Kashav Madan",
+    "email": "kshvmdn@gmail.com",
+    "url": "http://kshvmdn.me"
+  },
+  "homepage": "https://github.com/kshvmdn/til#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/kshvmdn/til.git"
+  },
+  "bin": {
+    "til": "./bin/til"
+  },
+  "keywords": [
+    "facts",
+    "todayilearned",
+    "til",
+    "cli"
+  ],
+  "xo": {
+    "esnext": true,
+    "space": true,
+    "rules": {
+      "space-before-function-paren": [
+        2,
+        "never"
+      ]
+    }
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kshvmdn/til/issues"
+  },
+  "dependencies": {
+    "colors": "^1.1.2",
+    "got": "^6.2.0",
+    "minimist": "^1.2.0",
+    "opn": "^4.0.1",
+    "pinkie-promise": "^2.0.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "xo": "^0.13.0"
+  }
+}
