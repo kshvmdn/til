@@ -19,6 +19,10 @@ const outputContent = posts => {
   return utils.output(posts);
 };
 
+const openLinks = (links, toOpen) => {
+  return utils.open(links, toOpen);
+}
+
 const run = options => {
   return fetchPosts()
     .then(response => {
@@ -31,6 +35,7 @@ const run = options => {
       return outputContent(response);
     })
     .then(response => {
+      return openLinks(response, options.open);
     })
     .catch(error => {
       console.log(error);

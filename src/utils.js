@@ -19,6 +19,7 @@ module.exports = () => {
       return _.sample(posts, n);
     },
     output: posts => {
+      const urls = [];
       _.each(posts, post => {
         const p = post.data;
         p.permalink = 'https://reddit.com' + p.permalink;
@@ -28,7 +29,16 @@ module.exports = () => {
         const links = colors.blue(`${p.url}\n${p.permalink}`);
 
         console.log(`\n${title}\n${stats}\n${links}\n`);
+        urls.push(p.url);
       });
+      return urls;
     },
+    open: (links, toOpen) => {
+      if (toOpen) {
+        _.each(links, link => {
+          open(link);
+        });
+      }
+    }
   };
 };
