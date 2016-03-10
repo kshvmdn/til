@@ -15,5 +15,20 @@ module.exports = () => {
         return !post.data.stickied;
       });
     },
+    choose: (posts, n) => {
+      return _.sample(posts, n);
+    },
+    output: posts => {
+      _.each(posts, post => {
+        const p = post.data;
+        p.permalink = 'https://reddit.com' + p.permalink;
+
+        const title = colors.bold(`${p.title}`);
+        const stats = colors.yellow(`👍: ${p.ups} | 💬: ${p.num_comments}`);
+        const links = colors.blue(`${p.url}\n${p.permalink}`);
+
+        console.log(`\n${title}\n${stats}\n${links}\n`);
+      });
+    },
   };
 };
