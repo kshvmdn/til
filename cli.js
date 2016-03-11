@@ -39,7 +39,10 @@ const help = `
     -s --sfw          Whether or not to _only_ show sfw content (defaults to false)
 
   Example:
-    $ til --posts 1
+    $ til --posts 1 # view 1 post
+    $ til --posts 7 --open # view and open 7 posts
+    $ til --posts 3 --open --detailed # view (in detail) and open 3 posts
+    $ til --posts 8 --open --detailed --sfw # view (in detail) and open 8 sfw posts
 `;
 
 const run = options => til(options);
