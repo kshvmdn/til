@@ -23,13 +23,9 @@ const defaults = {
     detailed: false
   }
 };
-
 const help = `
   Usage: til [OPTIONS]
     Open random TILs from /r/todayilearned.
-
-  Example:
-    $ til --posts 5 --open
 
   Options:
     -h --help         Display this help dialog
@@ -38,27 +34,27 @@ const help = `
     -o --open         Whether or not to open the links for the TILs (defaults to false)
     -d --detailed     Whether or not to show detailed information for each TIL (defaults to false)
 
-const run = argv => til(argv);
+  Example:
+    $ til --posts 1
+`;
 
-exports.exitCode = 0;
+const run = options => til(options);
 
-exports.stdout = process.stdout;
-exports.stderr = process.stderr;
+exports.out = process.stdout;
+exports.err = process.stderr;
 
-exports.parse = options => minimist(options, defaults);
+exports.parse = argv => minimist(argv, defaults);
 
-exports.run = argv => {
-  exports.exitCode = 0;
-
-  if (argv.help) {
-    exports.stderr.write(help);
+exports.run = options => {
+  if (options.help) {
+    exports.out.write(`${help}\n`);
     return;
   }
 
-  if (argv.version) {
-    exports.stderr.write(`til v${version}\n`);
+  if (options.version) {
+    exports.out.write(`til v${version}\n`);
     return;
   }
 
-  run(argv);
+  run(options);
 };
