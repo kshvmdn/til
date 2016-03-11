@@ -7,17 +7,20 @@ const defaults = {
   boolean: [
     'help',
     'version',
-    'open'
+    'open',
+    'detailed'
   ],
   alias: {
     h: 'help',
     v: 'version',
     p: 'posts',
-    o: 'open'
+    o: 'open',
+    d: 'detailed'
   },
   default: {
     posts: 1,
-    open: false
+    open: false,
+    detailed: false
   }
 };
 
@@ -33,7 +36,7 @@ const help = `
     -v --version      Display current version
     -p --posts        The number of TILs to display (defaults to 1)
     -o --open         Whether or not to open the links for the TILs (defaults to false)
-`;
+    -d --detailed     Whether or not to show detailed information for each TIL (defaults to false)
 
 const run = argv => til(argv);
 

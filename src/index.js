@@ -23,13 +23,19 @@ const chooseRandom = (posts, n) => {
   return _.sample(posts, n);
 };
 
-const outputContent = posts => {
-  return utils.output(posts);
 const output = (posts, showDetailed) => {
   const urls = [];
   _.each(posts, post => {
     const p = post.data;
+    const title = chalk.bold(ent.decode(`${p.title}`));
+    const stats = `▪ 👍: ${chalk.yellow(p.ups)} | 💬: ${chalk.yellow(p.num_comments)}`;
+    const url = `▪ ${chalk.green(p.url)}\n▪ ${chalk.magenta(`https://reddit.com${p.permalink}`)}`;
+
+    let str;
+    str = showDetailed ? `${title}\n${stats}\n${url}` : `${title}`;
+    console.log(`\n${str}\n`);
     urls.push(p.url);
+  });
   return urls;
 };
 
