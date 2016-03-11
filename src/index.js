@@ -1,44 +1,66 @@
 'use strict';
 
-const fetchOptions = require('./options');
-const utils = require('./utils')();
+const _ = require('underscore');
+const chalk = require('chalk');
+const ent = require('ent');
+const got = require('got');
+const open = require('opn');
 
-const fetchPosts = () => {
-  return utils.fetch(fetchOptions);
+const requestOptions = require('./options').request;
+const jsonUrl = 'https://www.reddit.com/r/todayilearned.json?limit=100';
+
+const fetch = (url, opt) => got(url, opt);
+
+const filter = posts => {
+  // remove stickied posts (i.e. modposts (i.e. non-TILs))
+  return _.filter(posts.data.children, post => {
+    return !post.data.stickied;
+  });
 };
 
-const filterPosts = posts => {
-  return utils.filter(posts);
-};
-
-const chooseRandomPost = (posts, n) => {
-  return utils.choose(posts, n);
+const chooseRandom = (posts, n) => {
+  n = n >= 0 ? n : 1;
+  return _.sample(posts, n);
 };
 
 const outputContent = posts => {
   return utils.output(posts);
+const output = (posts, showDetailed) => {
+  const urls = [];
+  _.each(posts, post => {
+    const p = post.data;
+    urls.push(p.url);
+  return urls;
 };
 
-const openLinks = (links, toOpen) => {
-  return utils.open(links, toOpen);
-}
+const openUrl = (urls, toOpen) => {
+  if (!toOpen) {
+    return;
+  }
+
+  _.each(urls, url => {
+    open(url);
+  });
+};
 
 const run = options => {
-  return fetchPosts()
+  return fetch(jsonUrl, requestOptions)
     .then(response => {
-      return filterPosts(response.body);
+      return filter(response.body);
     })
     .then(response => {
-      return chooseRandomPost(response, options.posts);
+      return chooseRandom(response, options.posts);
     })
     .then(response => {
-      return outputContent(response);
+      return output(response, options.detailed);
     })
     .then(response => {
-      return openLinks(response, options.open);
+      openUrl(response, options.open);
+      return process.exit(0);
     })
     .catch(error => {
       console.log(error);
+      return process.exit(1);
     });
 };
 
