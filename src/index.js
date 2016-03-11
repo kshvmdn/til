@@ -14,8 +14,7 @@ const fetch = (url, opt) => got(url, opt);
 const filter = (posts, sfw) => {
   // remove stickied posts (i.e. modposts (i.e. non-TILs))
   return _.filter(posts.data.children, post => {
-    return !post.data.stickied && (sfw || !post.data.over_18);
-    // return sfw ? !post.data.stickied && !post.data.over_18 : !post.data.stickied;
+    return sfw ? !post.data.stickied && !post.data.over_18 : !post.data.stickied;
   });
 };
 
@@ -32,8 +31,7 @@ const output = (posts, showDetailed) => {
     const stats = `▪ 👍: ${chalk.yellow(p.ups)} | 💬: ${chalk.yellow(p.num_comments)}`;
     const url = `▪ ${chalk.green(p.url)}\n▪ ${chalk.magenta(`https://reddit.com${p.permalink}`)}`;
 
-    let str;
-    str = showDetailed ? `${title}\n${stats}\n${url}` : `${title}`;
+    const str = showDetailed ? `${title}\n${stats}\n${url}` : `${title}`;
     console.log(`\n${str}\n`);
     urls.push(p.url);
   });
