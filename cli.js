@@ -1,8 +1,9 @@
 'use strict';
+const minimist = require('minimist');
 
 const til = require('./src/');
-const minimist = require('minimist');
 const version = require('./package.json').version;
+
 const defaults = {
   boolean: [
     'help',
