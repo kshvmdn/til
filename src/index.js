@@ -18,10 +18,7 @@ const filter = (posts, sfw) => {
   });
 };
 
-const chooseRandom = (posts, n) => {
-  n = n >= 0 ? n : 1;
-  return _.sample(posts, n);
-};
+const chooseRandom = (posts, n) => _.sample(posts, n <= 0 || isNaN(n) ? 1 : n);
 
 const output = (posts, showDetailed) => {
   const urls = [];
@@ -38,15 +35,7 @@ const output = (posts, showDetailed) => {
   return urls;
 };
 
-const openUrl = (urls, toOpen) => {
-  if (!toOpen) {
-    return;
-  }
-
-  _.each(urls, url => {
-    open(url);
-  });
-};
+const openUrl = urls => _.each(urls, url => open(url));
 
 const run = options => {
   return fetch(jsonUrl, requestOptions)
@@ -60,8 +49,7 @@ const run = options => {
       return output(response, options.detailed);
     })
     .then(response => {
-      openUrl(response, options.open);
-      return process.exit(0);
+      return (options.open ? openUrl(response) : null) && process.exit(1);
     })
     .catch(error => {
       console.log(error);
