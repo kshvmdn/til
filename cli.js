@@ -8,19 +8,22 @@ const defaults = {
     'help',
     'version',
     'open',
-    'detailed'
+    'detailed',
+    'sfw'
   ],
   alias: {
     h: 'help',
     v: 'version',
     p: 'posts',
     o: 'open',
-    d: 'detailed'
+    d: 'detailed',
+    s: 'sfw'
   },
   default: {
     posts: 1,
     open: false,
-    detailed: false
+    detailed: false,
+    sfw: false
   }
 };
 const help = `
@@ -31,8 +34,9 @@ const help = `
     -h --help         Display this help dialog
     -v --version      Display current version
     -p --posts        The number of TILs to display (defaults to 1)
-    -o --open         Whether or not to open the links for the TILs (defaults to false)
+    -o --open         Whether or not to open the TIL urls (defaults to false)
     -d --detailed     Whether or not to show detailed information for each TIL (defaults to false)
+    -s --sfw          Whether or not to _only_ show sfw content (defaults to false)
 
   Example:
     $ til --posts 1

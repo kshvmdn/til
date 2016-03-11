@@ -6,15 +6,16 @@ const ent = require('ent');
 const got = require('got');
 const open = require('opn');
 
-const requestOptions = require('./options').request;
+const requestOptions = require('./options');
 const jsonUrl = 'https://www.reddit.com/r/todayilearned.json?limit=100';
 
 const fetch = (url, opt) => got(url, opt);
 
-const filter = posts => {
+const filter = (posts, sfw) => {
   // remove stickied posts (i.e. modposts (i.e. non-TILs))
   return _.filter(posts.data.children, post => {
-    return !post.data.stickied;
+    // return !post.data.stickied && (sfw || !post.data.over_18);
+    return sfw ? !post.data.stickied && !post.data.over_18 : !post.data.stickied;
   });
 };
 
@@ -52,7 +53,7 @@ const openUrl = (urls, toOpen) => {
 const run = options => {
   return fetch(jsonUrl, requestOptions)
     .then(response => {
-      return filter(response.body);
+      return filter(response.body, options.sfw);
     })
     .then(response => {
       return chooseRandom(response, options.posts);
