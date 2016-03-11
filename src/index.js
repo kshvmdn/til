@@ -1,5 +1,4 @@
 'use strict';
-
 const _ = require('underscore');
 const chalk = require('chalk');
 const ent = require('ent');
@@ -24,13 +23,14 @@ const output = (posts, showDetailed) => {
   const urls = [];
   _.each(posts, post => {
     const p = post.data;
+    urls.push(p.url);
+
     const title = chalk.bold(ent.decode(`${p.title}`));
     const stats = `▪ 👍: ${chalk.yellow(p.ups)} | 💬: ${chalk.yellow(p.num_comments)}`;
     const url = `▪ ${chalk.green(p.url)}\n▪ ${chalk.magenta(`https://reddit.com${p.permalink}`)}`;
 
     const str = showDetailed ? `${title}\n${stats}\n${url}` : `${title}`;
-    console.log(`\n${str}\n`);
-    urls.push(p.url);
+    process.stdout.write(`\n${str}\n\n`);
   });
   return urls;
 };
@@ -52,7 +52,7 @@ const run = options => {
       return (options.open ? openUrl(response) : null) && process.exit(1);
     })
     .catch(error => {
-      console.log(error);
+      process.stderr.write(error);
       return process.exit(1);
     });
 };
