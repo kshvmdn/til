@@ -5,7 +5,7 @@ const ent = require('ent');
 const got = require('got');
 const open = require('opn');
 
-const requestOptions = require('./options');
+const request = require('./options').request;
 const jsonUrl = 'https://www.reddit.com/r/todayilearned.json?limit=100';
 
 const fetch = (url, opt) => got(url, opt);
@@ -38,7 +38,7 @@ const output = (posts, showDetailed) => {
 const openUrl = urls => _.each(urls, url => open(url));
 
 const run = options => {
-  return fetch(jsonUrl, requestOptions)
+  return fetch(jsonUrl, request)
     .then(response => {
       return filter(response.body, options.sfw);
     })
