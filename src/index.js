@@ -49,7 +49,7 @@ const run = options => {
       return output(response, options.detailed);
     })
     .then(response => {
-      return (options.open ? openUrl(response) : null) && process.exit(1);
+      return (options.open ? openUrl(response) : null) && process.exit(0);
     })
     .catch(error => {
       process.stderr.write(error);
