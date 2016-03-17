@@ -48,19 +48,19 @@ const help = `
 
 const run = options => til(options);
 
-exports.out = process.stdout;
-exports.err = process.stderr;
+exports.stdout = process.stdout;
+exports.stderr = process.stderr;
 
 exports.parse = argv => minimist(argv, defaults);
 
 exports.run = options => {
   if (options.help) {
-    exports.out.write(`${help}\n`);
+    exports.stdout.write(`${help}\n`);
     return;
   }
 
   if (options.version) {
-    exports.out.write(`til v${version}\n`);
+    exports.stdout.write(`til v${version}\n`);
     return;
   }
 
