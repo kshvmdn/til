@@ -55,13 +55,11 @@ exports.parse = argv => minimist(argv, defaults);
 
 exports.run = options => {
   if (options.help) {
-    exports.stdout.write(`${help}\n`);
-    return;
+    return exports.stdout.write(`${help}\n`);
   }
 
   if (options.version) {
-    exports.stdout.write(`til v${version}\n`);
-    return;
+    return exports.stdout.write(`til v${version}\n`);
   }
 
   run(options);
