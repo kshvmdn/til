@@ -1,6 +1,6 @@
 {
   "name": "todayilearned",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Open random TILs from /r/todayilearned.",
   "scripts": {
     "lint": "xo",
