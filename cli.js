@@ -24,7 +24,7 @@ const defaults = {
     posts: 1,
     open: false,
     detailed: false,
-    sfw: false
+    sfw: true
   }
 };
 const help = `
@@ -35,9 +35,9 @@ const help = `
     -h --help         Display this help dialog
     -v --version      Display current version
     -p --posts        The number of TILs to display (defaults to 1)
-    -o --open         Whether or not to open the TIL urls (defaults to false)
-    -d --detailed     Whether or not to show detailed information for each TIL (defaults to false)
-    -s --sfw          Whether or not to _only_ show sfw content (defaults to false)
+    -o --open         Open the url(s) (defaults to false)
+    -d --detailed     Show detailed information for each post (defaults to false)
+    -s --sfw          Only show sfw content (defaults to true)
 
   Example:
     $ til --posts 1 # view 1 post
