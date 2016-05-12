@@ -3,7 +3,7 @@ Read random TILs from [/r/todayilearned](https://reddit.com/r/todayilearned) thr
 
 ### Installation/usage
 
-+ Install via [npm](https://www.npmjs.com).
++ Install via [npm](https://www.npmjs.com/package/todayilearned).
 
   ```
   npm i todayilearned -g
