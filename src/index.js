@@ -12,9 +12,7 @@ const fetch = (url, opt) => got(url, opt);
 
 const filter = (posts, sfw) => {
   // remove stickied posts (i.e. modposts (i.e. non-TILs))
-  return _.filter(posts.data.children, post => {
-    return sfw ? !post.data.stickied && !post.data.over_18 : !post.data.stickied;
-  });
+  return _.filter(posts.data.children, post => !post.data.stickied && (sfw ? !post.data.over_18 : true));
 };
 
 const chooseRandom = (posts, n) => _.sample(posts, n <= 0 || isNaN(n) ? 1 : n);
